@@ -1,0 +1,1355 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for commonUI/notification/src/NotificationService.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">commonUI/notification/src/</a> NotificationService.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">87.5% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>77/88</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">70.73% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>29/41</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">86.36% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>19/22</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">87.5% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>77/88</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">16×</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">15×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-yes">29×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">29×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*****************************************************************************
+ * Open MCT Web, Copyright (c) 2014-2015, United States Government
+ * as represented by the Administrator of the National Aeronautics and Space
+ * Administration. All rights reserved.
+ *
+ * Open MCT Web is licensed under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ *
+ * Open MCT Web includes source code licensed under additional open source
+ * licenses. See the Open Source Licenses file (LICENSES.md) included with
+ * this source code distribution or the Licensing information page available
+ * at runtime from the About dialog for additional information.
+ *****************************************************************************/
+/*global define*/
+&nbsp;
+/**
+ * This bundle implements the notification service, which can be used to
+ * show banner notifications to the user. Banner notifications
+ * are used to inform users of events in a non-intrusive way. As
+ * much as possible, notifications share a model with blocking
+ * dialogs so that the same information can be provided in a dialog
+ * and then minimized to a banner notification if needed.
+ *
+ * @namespace platform/commonUI/notification
+ */
+define(
+    [],
+    function () {
+        "use strict";
+&nbsp;
+        /**
+         * A representation of a user action. Options are provided to
+         * dialogs and notifications and are shown as buttons.
+         *
+         * @typedef {object} NotificationOption
+         * @property {string} label the label to appear on the button for
+         * this action
+         * @property {function} callback a callback function to be invoked
+         * when the button is clicked
+        */
+&nbsp;
+        /**
+         * A representation of a banner notification. Banner notifications
+         * are used to inform users of events in a non-intrusive way. As
+         * much as possible, notifications share a model with blocking
+         * dialogs so that the same information can be provided in a dialog
+         * and then minimized to a banner notification if needed, or vice-versa.
+         *
+         * @typedef {object} NotificationModel
+         * @property {string} title The title of the message
+         * @property {string} severity The importance of the message (one of
+         * 'info', 'alert', or 'error' where info &lt; alert &lt;error)
+         * @property {number} [progress] The completion status of a task
+         * represented numerically
+         * @property {boolean} [unknownProgress] a boolean indicating that the
+         * progress of the underlying task is unknown. This will result in a
+         * visually distinct progress bar.
+         * @property {boolean | number} [autoDismiss] If truthy, dialog will
+         * be automatically minimized or dismissed (depending on severity).
+         * Additionally, if the provided value is a number, it will be used
+         * as the delay period before being dismissed.
+         * @property {boolean} [dismissable=true] If true, notification will
+         * include an option to dismiss it completely.
+         * @property {NotificationOption} [primaryOption] the default user
+         * response to
+         * this message. Will be represented as a button with the provided
+         * label and action. May be used by banner notifications to display
+         * only the most important option to users.
+         * @property {NotificationOption[]} [options] any additional
+         * actions the user can take. Will be represented as additional buttons
+         * that may or may not be available from a banner.
+         * @see DialogModel
+         */
+&nbsp;
+        /**
+         * A wrapper object that is returned as a handle to a newly created
+         * notification. Wraps the notifications model and decorates with
+         * functions to dismiss or minimize the notification.
+         *
+         * @typedef {object} Notification
+         * @property {function} dismiss This method is added to the object
+         * returned by {@link NotificationService#notify} and can be used to
+         * dismiss this notification. Dismissing a notification will remove
+         * it completely and it will not appear in the notification indicator
+         * @property {function} minimize This method is added to the object
+         * returned by {@link NotificationService#notify} and can be used to
+         * minimize this notification. Minimizing a notification will send
+         * it to the notification indicator
+         * @property {function} dismissOrMinimize This method is added to the
+         * object returned by {@link NotificationService#notify}. It will
+         * hide the notification by either dismissing or minimizing it,
+         * depending on severity. Typically this is the method that should
+         * be used for dismissing a notification. If more control is
+         * required, then the minimize or dismiss functions can be called
+         * individually.
+         * @property {function} onDismiss Allows listening for on dismiss
+         * events. This allows cleanup etc. when the notification is dismissed.
+         */
+&nbsp;
+        /**
+         * The notification service is responsible for informing the user of
+         * events via the use of banner notifications.
+         * @memberof platform/commonUI/notification
+         * @constructor
+         * @param $timeout the Angular $timeout service
+         * @param DEFAULT_AUTO_DISMISS The period of time that an
+         * auto-dismissed message will be displayed for.
+         * @param MINIMIZE_TIMEOUT When notifications are minimized, a brief
+         * animation is shown. This animation requires some time to execute,
+         * so a timeout is required before the notification is hidden
+         */
+        function NotificationService($timeout, topic, DEFAULT_AUTO_DISMISS, MINIMIZE_TIMEOUT) {
+            this.notifications = [];
+            this.$timeout = $timeout;
+            this.highest ={ severity: "info" };
+            this.DEFAULT_AUTO_DISMISS = DEFAULT_AUTO_DISMISS;
+            this.MINIMIZE_TIMEOUT = MINIMIZE_TIMEOUT;
+            this.topic = topic;
+&nbsp;
+            /*
+             * A context in which to hold the active notification and a
+             * handle to its timeout.
+             */
+            this.active = {};
+        }
+&nbsp;
+        /**
+         * Minimize a notification. The notification will still be available
+         * from the notification list. Typically notifications with a
+         * severity of 'info' should not be minimized, but rather
+         * dismissed. If you're not sure which is appropriate,
+         * use {@link Notification#dismissOrMinimize}
+         *
+         * @private
+         */
+        NotificationService.prototype.minimize = function (service, notification) {
+            //Check this is a known notification
+            var index = service.notifications.indexOf(notification);
+&nbsp;
+            <span class="missing-if-branch" title="if path not taken" >I</span>if (service.active.timeout){
+                /*
+                 Method can be called manually (clicking dismiss) or
+                 automatically from an auto-timeout. this.active.timeout
+                 acts as a semaphore to prevent race conditions. Cancel any
+                 timeout in progress (for the case where a manual dismiss
+                 has shortcut an active auto-dismiss), and clear the
+                 semaphore.
+                 */
+<span class="cstat-no" title="statement not covered" >                service.$timeout.cancel(service.active.timeout);</span>
+<span class="cstat-no" title="statement not covered" >                delete service.active.timeout;</span>
+            }
+&nbsp;
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (index &gt;= 0) {
+                notification.model.minimized=true;
+                //Add a brief timeout before showing the next notification
+                // in order to allow the minimize animation to run through.
+                service.$timeout(function() {
+                    service.setActiveNotification(service.selectNextNotification());
+                }, service.MINIMIZE_TIMEOUT);
+            }
+        };
+&nbsp;
+        /**
+         * Completely removes a notification. This will dismiss it from the
+         * message banner and remove it from the list of notifications.
+         * Typically only notifications with a severity of info should be
+         * dismissed. If you're not sure whether to dismiss or minimize a
+         * notification, use {@link Notification#dismissOrMinimize}.
+         * dismiss
+         *
+         * @private
+         */
+        NotificationService.prototype.dismiss = function (service, notification) {
+            //Check this is a known notification
+            var index = service.notifications.indexOf(notification);
+&nbsp;
+            <span class="missing-if-branch" title="if path not taken" >I</span>if (service.active.timeout){
+                /* Method can be called manually (clicking dismiss) or
+                 * automatically from an auto-timeout. this.active.timeout
+                 * acts as a semaphore to prevent race conditions. Cancel any
+                 * timeout in progress (for the case where a manual dismiss
+                 * has shortcut an active auto-dismiss), and clear the
+                 * semaphore.
+                 */
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                service.$timeout.cancel(service.active.timeout);</span>
+<span class="cstat-no" title="statement not covered" >                delete service.active.timeout;</span>
+            }
+&nbsp;
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (index &gt;= 0) {
+                service.notifications.splice(index, 1);
+            }
+            service.setActiveNotification(service.selectNextNotification());
+&nbsp;
+            this.setHighestSeverity();
+        };
+&nbsp;
+        /**
+         * Depending on the severity of the notification will selectively
+         * dismiss or minimize where appropriate.
+         *
+         * @private
+         */
+        NotificationService.prototype.dismissOrMinimize = function (notification) {
+&nbsp;
+            //For now minimize everything, and have discussion around which
+            //kind of messages should or should not be in the minimized
+            //notifications list
+            notification.minimize();
+        };
+&nbsp;
+        /**
+         * Returns the notification that is currently visible in the banner area
+         * @returns {Notification}
+         */
+        NotificationService.prototype.getActiveNotification = function (){
+            return this.active.notification;
+        };
+&nbsp;
+        /**
+         * A convenience method for info notifications. Notifications
+         * created via this method will be auto-dismissed after a default
+         * wait period
+         * @param {NotificationModel | string} message either a string for
+         * the title of the notification message, or a {@link NotificationModel}
+         * defining the options notification to display
+         * @returns {Notification} the provided notification decorated with
+         * functions to dismiss or minimize
+         */
+        NotificationService.prototype.info = function (message) {
+            var notificationModel = typeof message === "string" ? {title: message} : <span class="branch-1 cbranch-no" title="branch not covered" >message;</span>
+            notificationModel.autoDismiss = notificationModel.autoDismiss || true;
+            notificationModel.severity = "info";
+            return this.notify(notificationModel);
+        };
+&nbsp;
+        /**
+         * A convenience method for alert notifications. Notifications
+         * created via this method will will have severity of "alert" enforced
+         * @param {NotificationModel | string} message either a string for
+         * the title of the alert message with default options, or a
+         * {@link NotificationModel} defining the options notification to
+         * display
+         * @returns {Notification} the provided notification decorated with
+         * functions to dismiss or minimize
+         */
+        NotificationService.prototype.alert = <span class="fstat-no" title="function not covered" >function (message) {</span>
+<span class="cstat-no" title="statement not covered" >            var notificationModel = typeof message === "string" ? {title: message} : message;</span>
+<span class="cstat-no" title="statement not covered" >            notificationModel.severity = "alert";</span>
+<span class="cstat-no" title="statement not covered" >            return this.notify(notificationModel);</span>
+        };
+&nbsp;
+        /**
+         * A convenience method for error notifications. Notifications
+         * created via this method will will have severity of "error" enforced
+         * @param {NotificationModel | string} message either a string for
+         * the title of the error message with default options, or a
+         * {@link NotificationModel} defining the options notification to
+         * display
+         * @returns {Notification} the provided notification decorated with
+         * functions to dismiss or minimize
+         */
+        NotificationService.prototype.error = <span class="fstat-no" title="function not covered" >function (message) {</span>
+<span class="cstat-no" title="statement not covered" >            var notificationModel = typeof message === "string" ? {title: message} : message;</span>
+<span class="cstat-no" title="statement not covered" >            notificationModel.severity = "error";</span>
+<span class="cstat-no" title="statement not covered" >            return this.notify(notificationModel);</span>
+        };
+&nbsp;
+        /**
+         * @private
+         */
+        NotificationService.prototype.setHighestSeverity = function () {
+            var severity = {
+                    "info": 1,
+                    "alert": 2,
+                    "error": 3
+                };
+            this.highest.severity = this.notifications.reduce(function(previous, notification){
+                if (severity[notification.model.severity] &gt; severity[previous]){
+                    return notification.model.severity;
+                } else {
+                    return previous;
+                }
+            }, "info");
+        };
+&nbsp;
+        /**
+         * Notifies the user of an event. If there is a banner notification
+         * already active, then it will be dismissed or minimized automatically,
+         * and the provided notification displayed in its place.
+         *
+         * @param {NotificationModel} notificationModel The notification to
+         * display
+         * @returns {Notification} the provided notification decorated with
+         * functions to {@link Notification#dismiss} or {@link Notification#minimize}
+         */
+        NotificationService.prototype.notify = function (notificationModel) {
+            var self = this,
+                notification,
+                activeNotification = self.active.notification,
+                topic = this.topic();
+&nbsp;
+            notification = {
+                model: notificationModel,
+                minimize: function() {
+                    self.minimize(self, notification);
+                },
+                dismiss: function(){
+                    self.dismiss(self, notification);
+                    topic.notify();
+                },
+                dismissOrMinimize: function(){
+                    self.dismissOrMinimize(notification);
+                },
+                onDismiss: function(callback) {
+                    topic.listen(callback);
+                }
+            };
+&nbsp;
+            notificationModel.severity = notificationModel.severity || <span class="branch-1 cbranch-no" title="branch not covered" >"info";</span>
+            if (notificationModel.autoDismiss === true){
+                notificationModel.autoDismiss = this.DEFAULT_AUTO_DISMISS;
+            }
+&nbsp;
+            //Notifications support a 'dismissable' attribute. This is a
+            // convenience to support adding a 'dismiss' option to the
+            // notification for the common case of dismissing a
+            // notification. Could also be done manually by specifying an
+            // option on the model
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (notificationModel.dismissable !== false) {
+                notificationModel.options = notificationModel.options || [];
+                notificationModel.options.unshift({
+                    label: "Dismiss",
+                    callback: <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >                        notification.dismiss();</span>
+                    }
+                });
+            }
+&nbsp;
+            this.notifications.push(notification);
+&nbsp;
+            this.setHighestSeverity();
+&nbsp;
+            /*
+            Check if there is already an active (ie. visible) notification
+             */
+            if (!this.active.notification){
+                this.setActiveNotification(notification);
+&nbsp;
+            } else <span class="missing-if-branch" title="else path not taken" >E</span>if (!this.active.timeout){
+                /*
+                 If there is already an active notification, time it out. If it's
+                 already got a timeout in progress (either because it has had
+                 timeout forced because of a queue of messages, or it had an
+                 autodismiss specified), leave it to run. Otherwise force a
+                  timeout.
+&nbsp;
+                 This notifcation has been added to queue and will be
+                  serviced as soon as possible.
+                 */
+                this.active.timeout = this.$timeout(function () {
+                    activeNotification.dismissOrMinimize();
+                }, this.DEFAULT_AUTO_DISMISS);
+            }
+&nbsp;
+            return notification;
+&nbsp;
+        };
+&nbsp;
+        /**
+         * Used internally by the NotificationService
+         * @private
+         */
+        NotificationService.prototype.setActiveNotification =
+            function (notification) {
+&nbsp;
+                var self = this,
+                    timeout;
+                this.active.notification = notification;
+                /*
+                If autoDismiss has been specified, OR there are other
+                 notifications queued for display, setup a timeout to
+                  dismiss the dialog.
+                 */
+                if (notification &amp;&amp; (notification.model.autoDismiss
+                    || this.selectNextNotification())) {
+&nbsp;
+                    timeout = notification.model.autoDismiss || this.DEFAULT_AUTO_DISMISS;
+                    this.active.timeout = this.$timeout(function () {
+                        notification.dismissOrMinimize();
+                    }, timeout);
+                } else {
+                    delete this.active.timeout;
+                }
+        };
+&nbsp;
+        /**
+         * Used internally by the NotificationService
+         *
+         * @private
+         */
+        NotificationService.prototype.selectNextNotification = function () {
+            var notification,
+                i=0;
+&nbsp;
+            /*
+            Loop through the notifications queue and find the first one that
+            has not already been minimized (manually or otherwise).
+             */
+            for (; i&lt; this.notifications.length; i++) {
+                notification = this.notifications[i];
+&nbsp;
+                if (!notification.model.minimized
+                    &amp;&amp; notification!== this.active.notification) {
+&nbsp;
+                    return notification;
+                }
+            }
+        };
+&nbsp;
+        return NotificationService;
+    }
+);</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Sep 20 2016 16:31:26 GMT-0700 (PDT)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

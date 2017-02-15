@@ -1,0 +1,1 @@
+{"version":3,"file":"demo/res/css/image.css","sources":["demo/res/sass/image.scss"],"sourcesContent":[".scaled {\n    max-width: 100%;\n    max-height: 100%;\n}"],"mappings":";AAAA,AAAA,OAAO,CAAC;EACJ,SAAS,EAAE,IAAK;EAChB,UAAU,EAAE,IAAK,GACpB","names":[],"sourceRoot":"/source/"}

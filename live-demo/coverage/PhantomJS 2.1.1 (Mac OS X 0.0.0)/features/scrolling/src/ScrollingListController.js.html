@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for features/scrolling/src/ScrollingListController.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">features/scrolling/src/</a> ScrollingListController.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">42.86% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>18/42</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">5% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>1/20</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">33.33% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>3/9</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">42.86% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>18/42</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*****************************************************************************
+ * Open MCT Web, Copyright (c) 2014-2015, United States Government
+ * as represented by the Administrator of the National Aeronautics and Space
+ * Administration. All rights reserved.
+ *
+ * Open MCT Web is licensed under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ *
+ * Open MCT Web includes source code licensed under additional open source
+ * licenses. See the Open Source Licenses file (LICENSES.md) included with
+ * this source code distribution or the Licensing information page available
+ * at runtime from the About dialog for additional information.
+ *****************************************************************************/
+/*global define,Promise*/
+&nbsp;
+/**
+ * This bundle implements a "Scrolling List" view of telemetry data.
+ * @namespace platform/features/scrolling
+ */
+define(
+    ["./NameColumn", "./DomainColumn", "./RangeColumn", "./ScrollingListPopulator"],
+    function (NameColumn, DomainColumn, RangeColumn, ScrollingListPopulator) {
+        "use strict";
+&nbsp;
+        var ROW_COUNT = 18;
+&nbsp;
+        /**
+         * The ScrollingListController is responsible for populating
+         * the contents of the scrolling list view.
+         * @memberof platform/features/scrolling
+         * @constructor
+         */
+        function ScrollingListController($scope, formatter) {
+            var populator = new ScrollingListPopulator([]);
+&nbsp;
+            // Get a set of populated, ready-to-display rows for the
+            // latest data values.
+<span class="fstat-no" title="function not covered" >            function getRows(telemetry) {</span>
+<span class="cstat-no" title="statement not covered" >                var datas = telemetry.getResponse(),</span>
+                    objects = telemetry.getTelemetryObjects();
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                return populator.getRows(datas, objects, ROW_COUNT);</span>
+            }
+&nbsp;
+            // Update the contents
+<span class="fstat-no" title="function not covered" >            function updateRows() {</span>
+<span class="cstat-no" title="statement not covered" >                var telemetry = $scope.telemetry;</span>
+<span class="cstat-no" title="statement not covered" >                $scope.rows = telemetry ? getRows(telemetry) : [];</span>
+            }
+&nbsp;
+            // Set up columns based on telemetry metadata. This will
+            // include one column for each domain and range type, as
+            // well as a column for the domain object name.
+            function setupColumns(metadatas) {
+                var domainKeys = {},
+                    rangeKeys = {},
+                    columns = [];
+&nbsp;
+                // Add a domain to the set of columns, if a domain
+                // with the same key has not yet been inclued.
+<span class="fstat-no" title="function not covered" >                function addDomain(domain) {</span>
+<span class="cstat-no" title="statement not covered" >                    var key = domain.key;</span>
+<span class="cstat-no" title="statement not covered" >                    if (key &amp;&amp; !domainKeys[key]) {</span>
+<span class="cstat-no" title="statement not covered" >                        domainKeys[key] = true;</span>
+<span class="cstat-no" title="statement not covered" >                        columns.push(new DomainColumn(domain, formatter));</span>
+                    }
+                }
+&nbsp;
+                // Add a range to the set of columns, if a range
+                // with the same key has not yet been inclued.
+<span class="fstat-no" title="function not covered" >                function addRange(range) {</span>
+<span class="cstat-no" title="statement not covered" >                    var key = range.key;</span>
+<span class="cstat-no" title="statement not covered" >                    if (key &amp;&amp; !rangeKeys[key]) {</span>
+<span class="cstat-no" title="statement not covered" >                        rangeKeys[key] = true;</span>
+<span class="cstat-no" title="statement not covered" >                        columns.push(new RangeColumn(range, formatter));</span>
+                    }
+                }
+&nbsp;
+                // We cannot proceed if metadata is not available;
+                // clear all rows/columns.
+                <span class="missing-if-branch" title="else path not taken" >E</span>if (!Array.isArray(metadatas)) {
+                    columns = [];
+                    $scope.rows = [];
+                    $scope.headers = [];
+                    return;
+                }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                columns = [ new NameColumn() ];</span>
+&nbsp;
+                // Add domain, range columns
+<span class="cstat-no" title="statement not covered" >                metadatas.forEach(<span class="fstat-no" title="function not covered" >function (metadata) {</span></span>
+<span class="cstat-no" title="statement not covered" >                    (metadata.domains || []).forEach(addDomain);</span>
+                });
+<span class="cstat-no" title="statement not covered" >                metadatas.forEach(<span class="fstat-no" title="function not covered" >function (metadata) {</span></span>
+<span class="cstat-no" title="statement not covered" >                    (metadata.ranges || []).forEach(addRange);</span>
+                });
+&nbsp;
+                // Add default domain, range columns if none
+                // were described in metadata.
+<span class="cstat-no" title="statement not covered" >                if (Object.keys(domainKeys).length &lt; 1) {</span>
+<span class="cstat-no" title="statement not covered" >                    columns.push(new DomainColumn({name: "Time"}, formatter));</span>
+                }
+<span class="cstat-no" title="statement not covered" >                if (Object.keys(rangeKeys).length &lt; 1) {</span>
+<span class="cstat-no" title="statement not covered" >                    columns.push(new RangeColumn({name: "Value"}, formatter));</span>
+                }
+&nbsp;
+                // We have all columns now; use them to initializer
+                // the populator, which will use them to generate
+                // actual rows and headers.
+<span class="cstat-no" title="statement not covered" >                populator = new ScrollingListPopulator(columns);</span>
+&nbsp;
+                // Initialize headers
+<span class="cstat-no" title="statement not covered" >                $scope.headers = populator.getHeaders();</span>
+&nbsp;
+                // Fill in the contents of the rows.
+<span class="cstat-no" title="statement not covered" >                updateRows();</span>
+            }
+&nbsp;
+            $scope.$on("telemetryUpdate", updateRows);
+            $scope.$watch("telemetry.getMetadata()", setupColumns);
+        }
+&nbsp;
+        /**
+         * A description of how to display a certain column of data in a
+         * Scrolling List view.
+         * @interface platform/features/scrolling.ScrollingColumn
+         * @private
+         */
+        /**
+         * Get the title to display in this column's header.
+         * @returns {string} the title to display
+         * @method platform/features/scrolling.ScrollingColumn#getTitle
+         */
+        /**
+         * Get the text to display inside a row under this
+         * column.
+         * @param {DomainObject} domainObject the domain object associated
+         *        with this row
+         * @param {TelemetrySeries} series the telemetry data associated
+         *        with this row
+         * @param {number} index the index of the telemetry datum associated
+         *        with this row
+         * @returns {string} the text to display
+         * @method platform/features/scrolling.ScrollingColumn#getValue
+         */
+&nbsp;
+&nbsp;
+        return ScrollingListController;
+    }
+);
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Mar 02 2016 11:48:18 GMT-0800 (PST)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

@@ -1,0 +1,1643 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for features/table/src/controllers/MCTTableController.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">all files</a> / <a href="index.html">features/table/src/controllers/</a> MCTTableController.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">65.5% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>131/200</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">53.57% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>60/112</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">73.33% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>22/30</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">65.5% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>131/200</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line medium'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">14×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">10×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">37×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">74×</span>
+<span class="cline-any cline-yes">74×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">37×</span>
+<span class="cline-any cline-yes">37×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">37×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">37×</span>
+<span class="cline-any cline-yes">34×</span>
+<span class="cline-any cline-yes">34×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">37×</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">37×</span>
+<span class="cline-any cline-yes">18×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">37×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">29×</span>
+<span class="cline-any cline-yes">29×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">37×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6×</span>
+<span class="cline-any cline-yes">22×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">27×</span>
+<span class="cline-any cline-yes">69×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">69×</span>
+<span class="cline-any cline-yes">69×</span>
+<span class="cline-any cline-yes">69×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">69×</span>
+<span class="cline-any cline-yes">69×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">69×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">27×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*global define*/
+&nbsp;
+define(
+    [],
+    function () {
+        "use strict";
+&nbsp;
+        /**
+         * A controller for the MCTTable directive. Populates scope with
+         * data used for populating, sorting, and filtering
+         * tables.
+         * @param $scope
+         * @param $timeout
+         * @param element
+         * @constructor
+         */
+        function MCTTableController($scope, $timeout, element) {
+            var self = this;
+&nbsp;
+            this.$scope = $scope;
+            this.element = element;
+            this.$timeout = $timeout;
+            this.maxDisplayRows = 50;
+&nbsp;
+            this.scrollable = element.find('div');
+            this.thead = element.find('thead');
+            this.tbody = element.find('tbody');
+            this.$scope.sizingRow = {};
+&nbsp;
+            this.scrollable.on('scroll', this.onScroll.bind(this));
+&nbsp;
+            $scope.visibleRows = [];
+&nbsp;
+            /**
+             * Set default values for optional parameters on a given scope
+             */
+            function setDefaults($scope) {
+                <span class="missing-if-branch" title="else path not taken" >E</span>if (typeof $scope.enableFilter === 'undefined') {
+                    $scope.enableFilter = true;
+                    $scope.filters = {};
+                }
+                <span class="missing-if-branch" title="else path not taken" >E</span>if (typeof $scope.enableSort === 'undefined') {
+                    $scope.enableSort = true;
+                    $scope.sortColumn = undefined;
+                    $scope.sortDirection = undefined;
+                }
+            }
+&nbsp;
+            setDefaults($scope);
+&nbsp;
+            $scope.toggleSort = <span class="fstat-no" title="function not covered" >function (key) {</span>
+<span class="cstat-no" title="statement not covered" >                if (!$scope.enableSort) {</span>
+<span class="cstat-no" title="statement not covered" >                    return;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                if ($scope.sortColumn !== key) {</span>
+<span class="cstat-no" title="statement not covered" >                    $scope.sortColumn = key;</span>
+<span class="cstat-no" title="statement not covered" >                    $scope.sortDirection = 'asc';</span>
+                } else <span class="cstat-no" title="statement not covered" >if ($scope.sortDirection === 'asc') {</span>
+<span class="cstat-no" title="statement not covered" >                    $scope.sortDirection = 'desc';</span>
+                } else <span class="cstat-no" title="statement not covered" >if ($scope.sortDirection === 'desc') {</span>
+<span class="cstat-no" title="statement not covered" >                    $scope.sortColumn = undefined;</span>
+<span class="cstat-no" title="statement not covered" >                    $scope.sortDirection = undefined;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                self.setRows($scope.rows);</span>
+            };
+&nbsp;
+            /*
+             * Define watches to listen for changes to headers and rows.
+             */
+            $scope.$watchCollection('filters', <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >                self.setRows($scope.rows);</span>
+            });
+            $scope.$watch('headers', this.setHeaders.bind(this));
+            $scope.$watch('rows', this.setRows.bind(this));
+&nbsp;
+            /*
+             * Listen for rows added individually (eg. for real-time tables)
+             */
+            $scope.$on('add:row', this.addRow.bind(this));
+            $scope.$on('remove:row', this.removeRow.bind(this));
+        }
+&nbsp;
+        /**
+         * If auto-scroll is enabled, this function will scroll to the
+         * bottom of the page
+         * @private
+         */
+        MCTTableController.prototype.scrollToBottom = function () {
+            var self = this;
+&nbsp;
+            //Use timeout to defer execution until next digest when any
+            // pending UI changes have completed, eg. a new row in the table.
+            <span class="missing-if-branch" title="if path not taken" >I</span>if (this.$scope.autoScroll) {
+<span class="cstat-no" title="statement not covered" >                this.$timeout(<span class="fstat-no" title="function not covered" >function (){</span></span>
+<span class="cstat-no" title="statement not covered" >                        self.scrollable[0].scrollTop = self.scrollable[0].scrollHeight;</span>
+                });
+            }
+        };
+&nbsp;
+        /**
+         * Handles a row add event. Rows can be added as needed using the
+         * `add:row` broadcast event.
+         * @private
+         */
+        MCTTableController.prototype.addRow = function (event, rowIndex) {
+            var row = this.$scope.rows[rowIndex];
+&nbsp;
+            //Does the row pass the current filter?
+            if (this.filterRows([row]).length === 1) {
+                //Insert the row into the correct position in the array
+                this.insertSorted(this.$scope.displayRows, row);
+                
+                //Resize the columns , then update the rows visible in the table
+                this.resize([this.$scope.sizingRow, row])
+                    .then(this.setVisibleRows.bind(this))
+                    .then(this.scrollToBottom.bind(this));
+            }
+        };
+&nbsp;
+        /**
+         * Handles a row remove event. Rows can be removed as needed using the
+         * `remove:row` broadcast event.
+         * @private
+         */
+        MCTTableController.prototype.removeRow = function (event, rowIndex) {
+            var row = this.$scope.rows[rowIndex],
+                // Do a sequential search here. Only way of finding row is by
+                // object equality, so array is in effect unsorted.
+                indexInDisplayRows = this.$scope.displayRows.indexOf(row);
+                <span class="missing-if-branch" title="else path not taken" >E</span>if (indexInDisplayRows != -1) {
+                    this.$scope.displayRows.splice(indexInDisplayRows, 1);
+                    this.setVisibleRows();
+                }
+        };
+&nbsp;
+        /**
+         * @private
+         */
+        MCTTableController.prototype.onScroll = <span class="fstat-no" title="function not covered" >function (event) {</span>
+            //If user scrolls away from bottom, disable auto-scroll.
+            // Auto-scroll will be re-enabled if user scrolls to bottom again.
+<span class="cstat-no" title="statement not covered" >            if (this.scrollable[0].scrollTop &lt;</span>
+                (this.scrollable[0].scrollHeight - this.scrollable[0].offsetHeight)) {
+<span class="cstat-no" title="statement not covered" >                this.$scope.autoScroll = false;</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                this.$scope.autoScroll = true;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            this.setVisibleRows();</span>
+<span class="cstat-no" title="statement not covered" >            this.$scope.$digest();</span>
+        };
+&nbsp;
+        /**
+         * Sets visible rows based on array
+         * content and current scroll state.
+         */
+        MCTTableController.prototype.setVisibleRows = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >            var self = this,</span>
+                target = this.scrollable[0],
+                topScroll = target.scrollTop,
+                bottomScroll = topScroll + target.offsetHeight,
+                firstVisible,
+                lastVisible,
+                totalVisible,
+                numberOffscreen,
+                start,
+                end;
+&nbsp;
+            //No need to scroll
+<span class="cstat-no" title="statement not covered" >            if (this.$scope.displayRows.length &lt; this.maxDisplayRows) {</span>
+                //Check whether need to resynchronize visible with display
+                // rows (if data added)
+<span class="cstat-no" title="statement not covered" >                if (this.$scope.visibleRows.length !=</span>
+                    this.$scope.displayRows.length){
+<span class="cstat-no" title="statement not covered" >                    start = 0;</span>
+<span class="cstat-no" title="statement not covered" >                    end = this.$scope.displayRows.length;</span>
+                } else {
+                    //Data is in sync, and no need to calculate scroll,
+                    // so do nothing.
+<span class="cstat-no" title="statement not covered" >                    return;</span>
+                }
+            } else {
+                //rows has exceeded display maximum, so may be necessary to
+                // scroll
+<span class="cstat-no" title="statement not covered" >                if (topScroll &lt; this.$scope.headerHeight) {</span>
+<span class="cstat-no" title="statement not covered" >                    firstVisible = 0;</span>
+                } else {
+<span class="cstat-no" title="statement not covered" >                    firstVisible = Math.floor(</span>
+                        (topScroll - this.$scope.headerHeight) /
+                        this.$scope.rowHeight
+                    );
+                }
+<span class="cstat-no" title="statement not covered" >                lastVisible = Math.ceil(</span>
+                    (bottomScroll - this.$scope.headerHeight) /
+                    this.$scope.rowHeight
+                );
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                totalVisible = lastVisible - firstVisible;</span>
+<span class="cstat-no" title="statement not covered" >                numberOffscreen = this.maxDisplayRows - totalVisible;</span>
+<span class="cstat-no" title="statement not covered" >                start = firstVisible - Math.floor(numberOffscreen / 2);</span>
+<span class="cstat-no" title="statement not covered" >                end = lastVisible + Math.ceil(numberOffscreen / 2);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                if (start &lt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >                    start = 0;</span>
+<span class="cstat-no" title="statement not covered" >                    end = Math.min(this.maxDisplayRows,</span>
+                        this.$scope.displayRows.length);
+                } else <span class="cstat-no" title="statement not covered" >if (end &gt;= this.$scope.displayRows.length) {</span>
+<span class="cstat-no" title="statement not covered" >                    end = this.$scope.displayRows.length;</span>
+<span class="cstat-no" title="statement not covered" >                    start = end - this.maxDisplayRows + 1;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                if (this.$scope.visibleRows[0] &amp;&amp;</span>
+                    this.$scope.visibleRows[0].rowIndex === start &amp;&amp;
+                    this.$scope.visibleRows[this.$scope.visibleRows.length - 1]
+                        .rowIndex === end) {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    return; </span>// don't update if no changes are required.
+                }
+            }
+            //Set visible rows from display rows, based on calculated offset.
+<span class="cstat-no" title="statement not covered" >            this.$scope.visibleRows = this.$scope.displayRows.slice(start, end)</span>
+                .map(<span class="fstat-no" title="function not covered" >function (row, i) {</span>
+<span class="cstat-no" title="statement not covered" >                    return {</span>
+                        rowIndex: start + i,
+                        offsetY: ((start + i) * self.$scope.rowHeight) +
+                        self.$scope.headerHeight,
+                        contents: row
+                    };
+                });
+        };
+&nbsp;
+        /**
+         * Update table headers with new headers.  If filtering is
+         * enabled, reset filters.  If sorting is enabled, reset
+         * sorting.
+         */
+        MCTTableController.prototype.setHeaders = <span class="fstat-no" title="function not covered" >function (newHeaders) {</span>
+<span class="cstat-no" title="statement not covered" >            if (!newHeaders){</span>
+<span class="cstat-no" title="statement not covered" >                return;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            this.$scope.displayHeaders = newHeaders;</span>
+<span class="cstat-no" title="statement not covered" >            if (this.$scope.enableFilter) {</span>
+<span class="cstat-no" title="statement not covered" >                this.$scope.filters = {};</span>
+            }
+            // Reset column sort information unless the new headers
+            // contain the column currently sorted on.
+<span class="cstat-no" title="statement not covered" >            if (this.$scope.enableSort &amp;&amp;</span>
+                newHeaders.indexOf(this.$scope.sortColumn) === -1) {
+<span class="cstat-no" title="statement not covered" >                    this.$scope.sortColumn = undefined;</span>
+<span class="cstat-no" title="statement not covered" >                    this.$scope.sortDirection = undefined;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            this.setRows(this.$scope.rows);</span>
+        };
+&nbsp;
+        /**
+         * Read styles from the DOM and use them to calculate offsets
+         * for individual rows.
+         */
+        MCTTableController.prototype.setElementSizes = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >            var thead = this.thead,</span>
+                tbody = this.tbody,
+                firstRow = tbody.find('tr'),
+                column = firstRow.find('td'),
+                headerHeight = thead.prop('offsetHeight'),
+                rowHeight = firstRow.prop('offsetHeight'),
+                columnWidth,
+                tableWidth = 0,
+                overallHeight = headerHeight + (rowHeight *
+                    (this.$scope.displayRows ? this.$scope.displayRows.length - 1  : 0));
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            this.$scope.columnWidths = [];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            while (column.length) {</span>
+<span class="cstat-no" title="statement not covered" >                columnWidth = column.prop('offsetWidth');</span>
+<span class="cstat-no" title="statement not covered" >                this.$scope.columnWidths.push(column.prop('offsetWidth'));</span>
+<span class="cstat-no" title="statement not covered" >                tableWidth += columnWidth;</span>
+<span class="cstat-no" title="statement not covered" >                column = column.next();</span>
+            }
+<span class="cstat-no" title="statement not covered" >            this.$scope.headerHeight = headerHeight;</span>
+<span class="cstat-no" title="statement not covered" >            this.$scope.rowHeight = rowHeight;</span>
+<span class="cstat-no" title="statement not covered" >            this.$scope.totalHeight = overallHeight;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (tableWidth &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >                this.$scope.totalWidth = tableWidth + 'px';</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                this.$scope.totalWidth = 'none';</span>
+            }
+        };
+&nbsp;
+        /**
+         * @private
+         */
+        MCTTableController.prototype.insertSorted = function (array, element) {
+            var index = -1,
+                self = this,
+                sortKey = this.$scope.sortColumn;
+&nbsp;
+            function binarySearch(searchArray, searchElement, min, max){
+                var sampleAt = Math.floor((max - min) / 2) + min;
+&nbsp;
+                if (max &lt; min) {
+                    return min; // Element is not in array, min gives direction
+                }
+&nbsp;
+                switch(self.sortComparator(searchElement[sortKey].text,
+                    searchArray[sampleAt][sortKey].text)) {
+                    case -1:
+                        return binarySearch(searchArray, searchElement, min,
+                            sampleAt - 1);
+                    case 0 :
+                        return sampleAt;
+                    case 1 :
+                        return binarySearch(searchArray, searchElement,
+                            sampleAt + 1, max);
+                }
+            }
+&nbsp;
+            if (!this.$scope.sortColumn || !this.$scope.sortDirection) {
+                //No sorting applied, push it on the end.
+                index = array.length;
+            } else {
+                //Sort is enabled, perform binary search to find insertion point
+                index = binarySearch(array, element, 0, array.length - 1);
+            }
+            <span class="missing-if-branch" title="if path not taken" >I</span>if (index === -1){
+<span class="cstat-no" title="statement not covered" >                array.unshift(element);</span>
+            } else if (index === array.length){
+                array.push(element);
+            } else {
+                array.splice(index, 0, element);
+            }
+        };
+&nbsp;
+        /**
+         * Compare two variables, returning a number that represents
+         * which is larger.  Similar to the default array sort
+         * comparator, but does not coerce all values to string before
+         * conversion.  Strings are lowercased before comparison.
+         *
+         * @private
+         */
+        MCTTableController.prototype.sortComparator = function (a, b) {
+            var result = 0,
+                sortDirectionMultiplier,
+                numberA,
+                numberB;
+            /**
+             * Given a value, if it is a number, or a string representation of a
+             * number, then return a number representation. Otherwise, return
+             * the original value. It's a little more robust than using just
+             * Number() or parseFloat, or isNaN in isolation, all of which are
+             * fairly inconsistent in their results.
+             * @param value The value to return as a number.
+             * @returns {*} The value cast to a Number, or the original value if
+             * a Number representation is not possible.
+             */
+            function toNumber (value){
+                var val = !isNaN(Number(value)) &amp;&amp; !isNaN(parseFloat(value)) ? Number(value) : value;
+                return val;
+            }
+&nbsp;
+            numberA = toNumber(a);
+            numberB = toNumber(b);
+&nbsp;
+            //If they're both numbers, then compare them as numbers
+            if (typeof numberA === "number" &amp;&amp; typeof numberB === "number") {
+                a = numberA;
+                b = numberB;
+            }
+&nbsp;
+            //If they're both strings, then ignore case
+            if (typeof a === "string" &amp;&amp; typeof b === "string") {
+                a = a.toLowerCase();
+                b = b.toLowerCase();
+            }
+&nbsp;
+            if (a &lt; b) {
+                result = -1;
+            }
+            if (a &gt; b) {
+                result = 1;
+            }
+&nbsp;
+            if (this.$scope.sortDirection === 'asc') {
+                sortDirectionMultiplier = 1;
+            } else <span class="missing-if-branch" title="else path not taken" >E</span>if (this.$scope.sortDirection === 'desc') {
+                sortDirectionMultiplier = -1;
+            }
+&nbsp;
+            return result * sortDirectionMultiplier;
+        };
+&nbsp;
+        /**
+         * Returns a new array which is a result of applying the sort
+         * criteria defined in $scope.
+         *
+         * Does not modify the array that was passed in.
+         */
+        MCTTableController.prototype.sortRows = function (rowsToSort) {
+            var self = this,
+                sortKey = this.$scope.sortColumn;
+&nbsp;
+            if (!this.$scope.sortColumn || !this.$scope.sortDirection) {
+                return rowsToSort;
+            }
+&nbsp;
+            return rowsToSort.sort(function (a, b) {
+                return self.sortComparator(a[sortKey].text, b[sortKey].text);
+            });
+        };
+&nbsp;
+        /**
+         * Returns an object which contains the largest values
+         * for each key in the given set of rows.  This is used to
+         * pre-calculate optimal column sizes without having to render
+         * every row.
+         */
+        MCTTableController.prototype.buildLargestRow = function (rows) {
+            var largestRow = rows.reduce(function (prevLargest, row) {
+                Object.keys(row).forEach(function (key) {
+                    var currentColumn,
+                        currentColumnLength,
+                        largestColumn,
+                        largestColumnLength;
+                    <span class="missing-if-branch" title="else path not taken" >E</span>if (row[key]){
+                        currentColumn = (row[key]).text;
+                        currentColumnLength =
+                            (currentColumn &amp;&amp; currentColumn.length) ?
+                                currentColumn.length :
+<span class="branch-1 cbranch-no" title="branch not covered" >                                currentColumn;</span>
+                        largestColumn = prevLargest[key] ? prevLargest[key].text : "";
+                        largestColumnLength = largestColumn.length;
+&nbsp;
+                        if (currentColumnLength &gt; largestColumnLength) {
+                            prevLargest[key] = JSON.parse(JSON.stringify(row[key]));
+                        }
+                    }
+                });
+                return prevLargest;
+            }, JSON.parse(JSON.stringify(rows[0] || <span class="branch-1 cbranch-no" title="branch not covered" >{})</span>));
+            return largestRow;
+        };
+&nbsp;
+        /**
+         * Calculates the widest row in the table, and if necessary, resizes
+         * the table accordingly
+         *
+         * @param rows the rows on which to resize
+         * @returns {Promise} a promise that will resolve when resizing has
+         * occurred.
+         * @private
+         */
+        MCTTableController.prototype.resize = function (rows) {
+            this.$scope.sizingRow = this.buildLargestRow(rows);
+            return this.$timeout(this.setElementSizes.bind(this));
+        };
+&nbsp;
+        /**
+         * @private
+         */
+        MCTTableController.prototype.filterAndSort = function (rows) {
+            var displayRows = rows;
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (this.$scope.enableFilter) {
+                displayRows = this.filterRows(displayRows);
+            }
+&nbsp;
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (this.$scope.enableSort) {
+                displayRows = this.sortRows(displayRows.slice(0));
+            }
+            return displayRows;
+        };
+&nbsp;
+        /**
+         * Update rows with new data.  If filtering is enabled, rows
+         * will be sorted before display.
+         */
+        MCTTableController.prototype.setRows = function (newRows) {
+            //Nothing to show because no columns visible
+            <span class="missing-if-branch" title="if path not taken" >I</span>if (!this.$scope.displayHeaders || !newRows) {
+<span class="cstat-no" title="statement not covered" >                return;</span>
+            }
+&nbsp;
+            this.$scope.displayRows = this.filterAndSort(newRows || <span class="branch-1 cbranch-no" title="branch not covered" >[])</span>;
+            this.resize(newRows).then(this.setVisibleRows.bind(this));
+        };
+&nbsp;
+        /**
+         * Applies user defined filters to rows. These filters are based on
+         * the text entered in the search areas in each column.
+         * @param rowsToFilter {Object[]} The rows to apply filters to
+         * @returns {Object[]} A filtered copy of the supplied rows
+         */
+        MCTTableController.prototype.filterRows = function (rowsToFilter) {
+            var filters = {},
+                self = this;
+&nbsp;
+            /**
+             * Returns true if row matches all filters.
+             */
+            function matchRow(filters, row) {
+                return Object.keys(filters).every(function (key) {
+                    <span class="missing-if-branch" title="if path not taken" >I</span>if (!row[key]) {
+<span class="cstat-no" title="statement not covered" >                        return false;</span>
+                    }
+                    var testVal = String(row[key].text).toLowerCase();
+                    return testVal.indexOf(filters[key]) !== -1;
+                });
+            }
+&nbsp;
+            if (!Object.keys(this.$scope.filters).length) {
+                return rowsToFilter;
+            }
+&nbsp;
+            Object.keys(this.$scope.filters).forEach(function (key) {
+                <span class="missing-if-branch" title="if path not taken" >I</span>if (!self.$scope.filters[key]) {
+<span class="cstat-no" title="statement not covered" >                    return;</span>
+                }
+                filters[key] = self.$scope.filters[key].toLowerCase();
+            });
+&nbsp;
+            return rowsToFilter.filter(matchRow.bind(null, filters));
+        };
+&nbsp;
+&nbsp;
+        return MCTTableController;
+    }
+);
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Sep 20 2016 16:31:26 GMT-0700 (PDT)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+</body>
+</html>

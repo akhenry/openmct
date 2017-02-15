@@ -1,0 +1,989 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for features/layout/src/LayoutController.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../index.html">all files</a> / <a href="index.html">features/layout/src/</a> LayoutController.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">98.75% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>79/80</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">60% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>24/40</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>21/21</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">98.75% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>79/80</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">4×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">25×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-yes">8×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">31×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">31×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-yes">20×</span>
+<span class="cline-any cline-yes">40×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">17×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">31×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">31×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">26×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">11×</span>
+<span class="cline-any cline-yes">26×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*****************************************************************************
+ * Open MCT Web, Copyright (c) 2014-2015, United States Government
+ * as represented by the Administrator of the National Aeronautics and Space
+ * Administration. All rights reserved.
+ *
+ * Open MCT Web is licensed under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * http://www.apache.org/licenses/LICENSE-2.0.
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
+ *
+ * Open MCT Web includes source code licensed under additional open source
+ * licenses. See the Open Source Licenses file (LICENSES.md) included with
+ * this source code distribution or the Licensing information page available
+ * at runtime from the About dialog for additional information.
+ *****************************************************************************/
+/*global define*/
+&nbsp;
+/**
+ * This bundle implements object types and associated views for
+ * display-building.
+ * @namespace platform/features/layout
+ */
+define(
+    ['./LayoutDrag'],
+    function (LayoutDrag) {
+        "use strict";
+&nbsp;
+        var DEFAULT_DIMENSIONS = [ 12, 8 ],
+            DEFAULT_GRID_SIZE = [ 32, 32 ],
+            MINIMUM_FRAME_SIZE = [ 320, 180 ];
+&nbsp;
+        /**
+         * The LayoutController is responsible for supporting the
+         * Layout view. It arranges frames according to saved configuration
+         * and provides methods for updating these based on mouse
+         * movement.
+         * @memberof platform/features/layout
+         * @constructor
+         * @param {Scope} $scope the controller's Angular scope
+         */
+        function LayoutController($scope) {
+            var self = this,
+                callbackCount = 0;
+&nbsp;
+            // Update grid size when it changed
+            function updateGridSize(layoutGrid) {
+                var oldSize = self.gridSize;
+&nbsp;
+                self.gridSize = layoutGrid || <span class="branch-1 cbranch-no" title="branch not covered" >DEFAULT_GRID_SIZE;</span>
+&nbsp;
+                // Only update panel positions if this actually changed things
+                <span class="missing-if-branch" title="else path not taken" >E</span>if (self.gridSize[0] !== oldSize[0] ||
+<span class="branch-1 cbranch-no" title="branch not covered" >                        self.gridSize[1] !== oldSize[1])</span> {
+                    self.layoutPanels(Object.keys(self.positions));
+                }
+            }
+&nbsp;
+            // Position a panel after a drop event
+            //An editableDomainObject is provided, as the drop may have
+            // triggered a transition to edit mode.
+            function handleDrop(e, id, position, editableDomainObject) {
+                if (e.defaultPrevented) {
+                    return;
+                }
+                <span class="missing-if-branch" title="if path not taken" >I</span>if (editableDomainObject){
+<span class="cstat-no" title="statement not covered" >                    $scope.setEditable(editableDomainObject);</span>
+                }
+                // Ensure that configuration field is populated
+                $scope.configuration = $scope.configuration || <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
+                // Make sure there is a "panels" field in the
+                // view configuration.
+                $scope.configuration.panels =
+                    $scope.configuration.panels || <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
+                // Store the position of this panel.
+                $scope.configuration.panels[id] = {
+                    position: [
+                        Math.floor(position.x / self.gridSize[0]),
+                        Math.floor(position.y / self.gridSize[1])
+                    ],
+                    dimensions: self.defaultDimensions()
+                };
+                // Mark change as persistable
+                <span class="missing-if-branch" title="else path not taken" >E</span>if ($scope.commit) {
+                    $scope.commit("Dropped a frame.");
+                }
+                // Populate template-facing position for this id
+                self.rawPositions[id] =
+                    $scope.configuration.panels[id];
+                self.populatePosition(id);
+                // Layout may contain embedded views which will
+                // listen for drops, so call preventDefault() so
+                // that they can recognize that this event is handled.
+                e.preventDefault();
+            }
+&nbsp;
+            //Will fetch fully contextualized composed objects, and populate
+            // scope with them.
+            function refreshComposition() {
+                //Keep a track of how many composition callbacks have been made
+                var thisCount = ++callbackCount;
+&nbsp;
+                $scope.domainObject.useCapability('composition').then(function(composition){
+                    var ids;
+&nbsp;
+                    //Is this callback for the most recent composition
+                    // request? If not, discard it. Prevents race condition
+                    if (thisCount === callbackCount){
+                        ids = composition.map(function (object) {
+                                return object.getId();
+                            }) || <span class="branch-1 cbranch-no" title="branch not covered" >[];</span>
+&nbsp;
+                        $scope.composition = composition;
+                        self.layoutPanels(ids);
+                    }
+                });
+            }
+&nbsp;
+            // End drag; we don't want to put $scope into this
+            // because it triggers "cpws" (copy window or scope)
+            // errors in Angular.
+            this.endDragInScope = function () {
+                // Write to configuration; this is watched and
+                // saved by the EditRepresenter.
+                $scope.configuration =
+                    $scope.configuration || <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
+                // Make sure there is a "panels" field in the
+                // view configuration.
+                $scope.configuration.panels =
+                    $scope.configuration.panels || <span class="branch-1 cbranch-no" title="branch not covered" >{};</span>
+                // Store the position of this panel.
+                $scope.configuration.panels[self.activeDragId] =
+                    self.rawPositions[self.activeDragId];
+                // Mark this object as dirty to encourage persistence
+                <span class="missing-if-branch" title="else path not taken" >E</span>if ($scope.commit) {
+                    $scope.commit("Moved frame.");
+                }
+            };
+&nbsp;
+            this.positions = {};
+            this.rawPositions = {};
+            this.gridSize = DEFAULT_GRID_SIZE;
+            this.$scope = $scope;
+&nbsp;
+            // Watch for changes to the grid size in the model
+            $scope.$watch("model.layoutGrid", updateGridSize);
+&nbsp;
+            // Update composed objects on screen, and position panes
+            $scope.$watchCollection("model.composition", refreshComposition);
+&nbsp;
+            // Position panes where they are dropped
+            $scope.$on("mctDrop", handleDrop);
+        }
+&nbsp;
+        // Convert from { positions: ..., dimensions: ... } to an
+        // apropriate ng-style argument, to position frames.
+        LayoutController.prototype.convertPosition = function (raw) {
+            var gridSize = this.gridSize;
+            // Multiply position/dimensions by grid size
+            return {
+                left: (gridSize[0] * raw.position[0]) + 'px',
+                top: (gridSize[1] * raw.position[1]) + 'px',
+                width: (gridSize[0] * raw.dimensions[0]) + 'px',
+                height: (gridSize[1] * raw.dimensions[1]) + 'px'
+            };
+        };
+&nbsp;
+        // Generate default positions for a new panel
+        LayoutController.prototype.defaultDimensions = function () {
+            var gridSize = this.gridSize;
+            return MINIMUM_FRAME_SIZE.map(function (min, i) {
+                return Math.max(
+                    Math.ceil(min / gridSize[i]),
+                    DEFAULT_DIMENSIONS[i]
+                );
+            });
+        };
+&nbsp;
+        // Generate a default position (in its raw format) for a frame.
+        // Use an index to ensure that default positions are unique.
+        LayoutController.prototype.defaultPosition = function (index) {
+            return {
+                position: [index, index],
+                dimensions: this.defaultDimensions()
+            };
+        };
+&nbsp;
+        // Store a computed position for a contained frame by its
+        // domain object id. Called in a forEach loop, so arguments
+        // are as expected there.
+        LayoutController.prototype.populatePosition = function (id, index) {
+            this.rawPositions[id] =
+                this.rawPositions[id] || this.defaultPosition(index || <span class="branch-1 cbranch-no" title="branch not covered" >0)</span>;
+            this.positions[id] =
+                this.convertPosition(this.rawPositions[id]);
+        };
+&nbsp;
+        /**
+         * Get a style object for a frame with the specified domain
+         * object identifier, suitable for use in an `ng-style`
+         * directive to position a frame as configured for this layout.
+         * @param {string} id the object identifier
+         * @returns {Object.&lt;string, string&gt;} an object with
+         *          appropriate left, width, etc fields for positioning
+         */
+        LayoutController.prototype.getFrameStyle = function (id) {
+            // Called in a loop, so just look up; the "positions"
+            // object is kept up to date by a watch.
+            return this.positions[id];
+        };
+&nbsp;
+        /**
+         * Start a drag gesture to move/resize a frame.
+         *
+         * The provided position and dimensions factors will determine
+         * whether this is a move or a resize, and what type it
+         * will be. For instance, a position factor of [1, 1]
+         * will move a frame along with the mouse as the drag
+         * proceeds, while a dimension factor of [0, 0] will leave
+         * dimensions unchanged. Combining these in different
+         * ways results in different handles; a position factor of
+         * [1, 0] and a dimensions factor of [-1, 0] will implement
+         * a left-edge resize, as the horizontal position will move
+         * with the mouse while the horizontal dimensions shrink in
+         * kind (and vertical properties remain unmodified.)
+         *
+         * @param {string} id the identifier of the domain object
+         *        in the frame being manipulated
+         * @param {number[]} posFactor the position factor
+         * @param {number[]} dimFactor the dimensions factor
+         */
+        LayoutController.prototype.startDrag = function (id, posFactor, dimFactor) {
+            this.activeDragId = id;
+            this.activeDrag = new LayoutDrag(
+                this.rawPositions[id],
+                posFactor,
+                dimFactor,
+                this.gridSize
+            );
+        };
+        /**
+         * Continue an active drag gesture.
+         * @param {number[]} delta the offset, in pixels,
+         *        of the current pointer position, relative
+         *        to its position when the drag started
+         */
+        LayoutController.prototype.continueDrag = function (delta) {
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (this.activeDrag) {
+                this.rawPositions[this.activeDragId] =
+                    this.activeDrag.getAdjustedPosition(delta);
+                this.populatePosition(this.activeDragId);
+            }
+        };
+&nbsp;
+        // Utility function to copy raw positions from configuration,
+        // without writing directly to configuration (to avoid triggering
+        // persistence from watchers during drags).
+        function shallowCopy(obj, keys) {
+            var copy = {};
+            keys.forEach(function (k) {
+                copy[k] = obj[k];
+            });
+            return copy;
+        }
+&nbsp;
+        /**
+         * Compute panel positions based on the layout's object model.
+         * Defined as member function to facilitate testing.
+         * @private
+         */
+        LayoutController.prototype.layoutPanels = function (ids) {
+            var configuration = this.$scope.configuration || <span class="branch-1 cbranch-no" title="branch not covered" >{},</span>
+                self = this;
+&nbsp;
+            // Pull panel positions from configuration
+            this.rawPositions =
+                shallowCopy(configuration.panels || <span class="branch-1 cbranch-no" title="branch not covered" >{},</span> ids);
+&nbsp;
+            // Clear prior computed positions
+            this.positions = {};
+&nbsp;
+            // Update width/height that we are tracking
+            this.gridSize =
+                (this.$scope.model || <span class="branch-1 cbranch-no" title="branch not covered" >{})</span>.layoutGrid || DEFAULT_GRID_SIZE;
+&nbsp;
+            // Compute positions and add defaults where needed
+            ids.forEach(function (id, index) {
+                self.populatePosition(id, index);
+            });
+        };
+&nbsp;
+        /**
+         * End the active drag gesture. This will update the
+         * view configuration.
+         */
+        LayoutController.prototype.endDrag = function () {
+            this.endDragInScope();
+        };
+&nbsp;
+        return LayoutController;
+    }
+);
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Sep 20 2016 16:31:26 GMT-0700 (PDT)
+</div>
+</div>
+<script src="../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../sorter.js"></script>
+</body>
+</html>

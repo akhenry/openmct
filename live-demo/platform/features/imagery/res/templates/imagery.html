@@ -1,0 +1,66 @@
+<div class="t-imagery" ng-controller="ImageryController as imagery">
+    <div
+        class="l-image-main-wrapper"
+        ng-mouseenter="showLocalControls = true;"
+        ng-mouseleave="showLocalControls = false;"
+        >
+        <div
+            class="l-local-controls s-local-controls"
+            ng-show="false && showLocalControls"
+             >
+            <a
+               class="s-btn"
+               ng-click="plot.stepBackPanZoom()"
+               ng-show="1"
+               title="Restore previous pan/zoom">
+                <span class="ui-symbol icon">&lt;</span>
+            </a>
+
+            <a
+               class="s-btn"
+               ng-click="plot.unzoom()"
+               ng-show="1"
+               title="Reset pan/zoom">
+                <span class="ui-symbol icon">I</span>
+            </a>
+        </div>
+
+        <div
+            class="l-image-main s-image-main"
+            ng-class="{ paused: imagery.paused(), stale:false }"
+            mct-background-image="imagery.getImageUrl()"
+            >
+        </div>
+
+        <div class="l-image-main-controlbar l-flex-row">
+            <div class="left flex-elem grows">
+                <a
+                    class="s-btn show-thumbs sm hidden"
+                    ng-click="showThumbsBubble = (showThumbsBubble)? false:true"
+                    ><span class="ui-symbol icon"></span></a>
+                <span class="l-timezone">{{imagery.getZone()}}</span>
+                <span class="l-time">{{imagery.getTime()}}</span>
+                <span class="l-date">{{imagery.getDate()}}</span>
+            </div>
+            <div class="right flex-elem">
+                <a
+                    class="s-btn pause-play"
+                    ng-click="imagery.paused(!imagery.paused())"
+                    ng-class="{ paused: imagery.paused() }"
+                    ><span class="ui-symbol icon"></span></a>
+                <a href="{{imagery.getImageUrl()}}"
+                   ng-if="imagery.getImageUrl()"
+                   target="_blank"
+                   title="Open image in new tab."
+                   class="s-btn">
+                    <span class="ui-symbol icon">y</span></a>
+                <a href=""
+                    class="s-btn l-mag s-mag ui-symbol vsm"
+                    ng-click="clipped = false"
+                    ng-show="clipped === true"
+                    title="Not all of image is visible; click to reset."
+                    ></a>
+            </div>
+        </div>
+    </div>
+</div>

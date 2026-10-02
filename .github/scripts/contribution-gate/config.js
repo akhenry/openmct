@@ -51,16 +51,8 @@ const DEADLINE_DAYS = {
 const REMINDER_LEAD_DAYS = 2;
 
 /** Every one of these must succeed before the gate pays for an AI review. */
-const REQUIRED_CHECK_NAMES = [
-  'lint',
-  'unit-test',
-  'e2e-ci (shard 1/4)',
-  'e2e-ci (shard 2/4)',
-  'e2e-ci (shard 3/4)',
-  'e2e-ci (shard 4/4)',
-  'visual-a11y-ci (shard 1/2)',
-  'visual-a11y-ci (shard 2/2)'
-];
+// FORK TEST ONLY: wait for lint alone, so a full CI run is not needed.
+const REQUIRED_CHECK_NAMES = ['lint'];
 
 /**
  * Checks that must pass if they run at all, but whose absence is not held
@@ -123,7 +115,8 @@ const REVIEWER_TEAM_SLUG = 'openmct-maintainers';
 const TEAM_ALLOWLIST = [];
 
 /** Author associations GitHub reports for people on the team. */
-const TEAM_AUTHOR_ASSOCIATIONS = ['OWNER', 'MEMBER', 'COLLABORATOR'];
+// FORK TEST ONLY: nobody is treated as team, so the fork's owner can be closed out.
+const TEAM_AUTHOR_ASSOCIATIONS = [];
 
 /** Comment command that asks the gate to look again, including at closed items. */
 const RECHECK_COMMAND = '/recheck';

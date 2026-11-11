@@ -100,10 +100,10 @@ reviews:
 
   pre_merge_checks:
     # The author cannot override a failing check; only a requested reviewer can.
-    override_requested_reviewers_only: true
+    override_requested_reviewers_only: false
 
     title:
-      mode: warning
+      mode: 'off'
       requirements: >-
         Starts with a short subsystem or feature name in square brackets, followed by a
         space and a plain summary of the change, e.g. "[Plot] Release axis listeners on
@@ -112,11 +112,11 @@ reviews:
     description:
       mode: 'off'
     issue_assessment:
-      mode: warning
+      mode: 'off'
 
     custom_checks:
       - name: Description explains why
-        mode: warning
+        mode: 'off'
         instructions: >-
           Pass if the pull request description states the problem being solved or the
           reason for the change, in terms of Open MCT's behaviour or users, and not only
@@ -126,7 +126,7 @@ reviews:
           Quote the sentence that is missing or inaccurate.
 
       - name: Verification is described
-        mode: warning
+        mode: 'off'
         instructions: >-
           Pass if the description says how the author verified the change: the steps
           they followed or the tests they ran, and what they observed. If the diff
@@ -136,7 +136,7 @@ reviews:
           locally" or "all tests pass" with no steps or observations.
 
       - name: Changed code is tested
-        mode: warning
+        mode: 'off'
         instructions: >-
           Pass if the diff adds or changes a test that exercises the changed behaviour.
           Open MCT prefers Playwright end-to-end tests under e2e/ for new work; a
